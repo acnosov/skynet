@@ -4,8 +4,8 @@
 
 
 bet365 := []
-bet365.user := "olykaptilova"
-bet365.pass := "tujhktnjdevth1"
+bet365.user := ""
+bet365.pass := ""
 bet365.url := "http://www.bet365.com/instantbet/default.asp?instantbet=1&participantid=1123102008&odds=2.850"
 bet365.urlhistory := "https://members.bet365.com/Members/Authenticated/History/Sports/"
 bet365.history := 1
@@ -21,32 +21,32 @@ If !pwb
    pwb.Navigate(bet365.urlhistory)
 
 
-   If vilka = 1   ;Если нужно проверить вилку
+   If vilka = 1   ;Г…Г±Г«ГЁ Г­ГіГ¦Г­Г® ГЇГ°Г®ГўГҐГ°ГЁГІГј ГўГЁГ«ГЄГі
    {
    pwb.Navigate(bet365.url)
 while pwb.busy or pwb.ReadyState != 4 ;Wait for page to load
    Sleep, 50
 
-ComObjError(false)  ;Не показывать ошибки Com
+ComObjError(false)  ;ГЌГҐ ГЇГ®ГЄГ Г§Г»ГўГ ГІГј Г®ГёГЁГЎГЄГЁ Com
 
-;Логинимся если не залогинены
-   If pwb.document.all.aJNL.innerText   ;Если есть текст Join Now
+;Г‹Г®ГЈГЁГ­ГЁГ¬Г±Гї ГҐГ±Г«ГЁ Г­ГҐ Г§Г Г«Г®ГЈГЁГ­ГҐГ­Г»
+   If pwb.document.all.aJNL.innerText   ;Г…Г±Г«ГЁ ГҐГ±ГІГј ГІГҐГЄГ±ГІ Join Now
    {
-      pwb.document.all.txtUserName.Value := bet365.user       ;логин
-      pwb.document.all.txtPassword.Value := bet365.pass       ;пароль
-      pwb.document.getElementById("aLGI").click()      ;вход
-      while !(pwb.document.all.sbl.innerText)          ;Ждем когда появится баланс
+      pwb.document.all.txtUserName.Value := bet365.user       ;Г«Г®ГЈГЁГ­
+      pwb.document.all.txtPassword.Value := bet365.pass       ;ГЇГ Г°Г®Г«Гј
+      pwb.document.getElementById("aLGI").click()      ;ГўГµГ®Г¤
+      while !(pwb.document.all.sbl.innerText)          ;Г†Г¤ГҐГ¬ ГЄГ®ГЈГ¤Г  ГЇГ®ГїГўГЁГІГ±Гї ГЎГ Г«Г Г­Г±
       Sleep, 100
    } 
    
-   pwb.document.all.tags("A")[11].click()               ;проверяем максимум
+   pwb.document.all.tags("A")[11].click()               ;ГЇГ°Г®ГўГҐГ°ГїГҐГ¬ Г¬Г ГЄГ±ГЁГ¬ГіГ¬
    while pwb.busy or pwb.ReadyState != 4                ;Wait for page to load
    Sleep, 50
-;получаем параметры    
-   bet365.odds:=pwb.document.all.do1001.innerText              ;Коэф 
-   bet365.fora:=pwb.document.all.dl1001.innerText              ;Фора
-   bet365.balance:=pwb.document.all.tags("FONT")[3].innerText  ;Баланс
-   bet365.maximum:=pwb.document.all.Risk1001.value             ;Фора
+;ГЇГ®Г«ГіГ·Г ГҐГ¬ ГЇГ Г°Г Г¬ГҐГІГ°Г»    
+   bet365.odds:=pwb.document.all.do1001.innerText              ;ГЉГ®ГЅГґ 
+   bet365.fora:=pwb.document.all.dl1001.innerText              ;Г”Г®Г°Г 
+   bet365.balance:=pwb.document.all.tags("FONT")[3].innerText  ;ГЃГ Г«Г Г­Г±
+   bet365.maximum:=pwb.document.all.Risk1001.value             ;Г”Г®Г°Г 
    MsgBox % bet365.odds bet365.fora bet365.balance bet365.maximum
    }
 
@@ -59,33 +59,33 @@ ComObjError(false)  ;Не показывать ошибки Com
 
 
 
-   If bet365.history = 1   ;Если нужно проверить вилку
+   If bet365.history = 1   ;Г…Г±Г«ГЁ Г­ГіГ¦Г­Г® ГЇГ°Г®ГўГҐГ°ГЁГІГј ГўГЁГ«ГЄГі
    {
    ;pwb.Navigate(bet365.urlhistory)
    while pwb.busy or pwb.ReadyState != 4 ;Wait for page to load
    Sleep, 50
-   ComObjError(false)  ;Не показывать ошибки Com
-   ;Логинимся если не залогинены
-   If pwb.document.all.ctl00_main_login_lkLostLogin.innerText   ;Если есть текст Join Now
+   ComObjError(false)  ;ГЌГҐ ГЇГ®ГЄГ Г§Г»ГўГ ГІГј Г®ГёГЁГЎГЄГЁ Com
+   ;Г‹Г®ГЈГЁГ­ГЁГ¬Г±Гї ГҐГ±Г«ГЁ Г­ГҐ Г§Г Г«Г®ГЈГЁГ­ГҐГ­Г»
+   If pwb.document.all.ctl00_main_login_lkLostLogin.innerText   ;Г…Г±Г«ГЁ ГҐГ±ГІГј ГІГҐГЄГ±ГІ Join Now
    {
-      pwb.document.all.ctl00_main_login_UserNameText.Value := bet365.user       ;логин
-      pwb.document.all.ctl00_main_login_PasswordText.Value := bet365.pass       ;пароль
-      ;pwb.document.getElementById("ctl00_main_login_lkSbmt").click()      ;вход
-      while !(pwb.document.all.ctl00_main_SportsHistorySearchControl_lblTitle.innerText)          ;Ждем когда появится баланс
+      pwb.document.all.ctl00_main_login_UserNameText.Value := bet365.user       ;Г«Г®ГЈГЁГ­
+      pwb.document.all.ctl00_main_login_PasswordText.Value := bet365.pass       ;ГЇГ Г°Г®Г«Гј
+      ;pwb.document.getElementById("ctl00_main_login_lkSbmt").click()      ;ГўГµГ®Г¤
+      while !(pwb.document.all.ctl00_main_SportsHistorySearchControl_lblTitle.innerText)          ;Г†Г¤ГҐГ¬ ГЄГ®ГЈГ¤Г  ГЇГ®ГїГўГЁГІГ±Гї ГЎГ Г«Г Г­Г±
       Sleep, 100
    } 
 
-      while !(pwb.document.all.ctl00_main_SportsHistorySearchControl_lblTitle.innerText)   ;Ждем когда появится баланс
+      while !(pwb.document.all.ctl00_main_SportsHistorySearchControl_lblTitle.innerText)   ;Г†Г¤ГҐГ¬ ГЄГ®ГЈГ¤Г  ГЇГ®ГїГўГЁГІГ±Гї ГЎГ Г«Г Г­Г±
       Sleep, 100
 
-      pwb.document.GetElementsByTagName("SELECT")[0].Value :="3" ;расчитанные ставки
-      pwb.document.GetElementsByTagName("INPUT")[13].checked :=1 ;за 48 часов
-      pwb.document.all.ctl00_main_SportsHistorySearchControl_dateSearchControl_lkGo.click()  ;показать историю
+      pwb.document.GetElementsByTagName("SELECT")[0].Value :="3" ;Г°Г Г±Г·ГЁГІГ Г­Г­Г»ГҐ Г±ГІГ ГўГЄГЁ
+      pwb.document.GetElementsByTagName("INPUT")[13].checked :=1 ;Г§Г  48 Г·Г Г±Г®Гў
+      pwb.document.all.ctl00_main_SportsHistorySearchControl_dateSearchControl_lkGo.click()  ;ГЇГ®ГЄГ Г§Г ГІГј ГЁГ±ГІГ®Г°ГЁГѕ
 
        while pwb.busy or pwb.ReadyState != 4 ;Wait for page to load
          Sleep, 100
       Loop, 3 {
-      pwb.document.all.ctl00_main_SportsHistorySearchControl_btnShowMore.click() ;показать больше записей
+      pwb.document.all.ctl00_main_SportsHistorySearchControl_btnShowMore.click() ;ГЇГ®ГЄГ Г§Г ГІГј ГЎГ®Г«ГјГёГҐ Г§Г ГЇГЁГ±ГҐГ©
       Sleep, 300 
       }
       table:= pwb.document.getElementByID("results").childnodes.length  
@@ -137,12 +137,12 @@ loop % (elements := pwb.document.getElementsByTagName("address")).length  ;Store
 
 
    ;pwb.document.all.Risk1001.Value :="0.2" ;Unique ID -no dashes
-;~ //Заполняем форму входа
+;~ //Г‡Г ГЇГ®Г«Г­ГїГҐГ¬ ГґГ®Г°Г¬Гі ГўГµГ®Г¤Г 
                         ;~ document.getElementById("txtUserName1").value = command.login;
                         ;~ document.getElementById("txtUserName").value = command.login;
                         ;~ document.getElementById("txtPassword1").value = command.password;
                         ;~ document.getElementById("txtPassword").value = command.password;
-                        ;~ gLi(); //давим кнопку или document.getElementById("aLGI").click();
+                        ;~ gLi(); //Г¤Г ГўГЁГ¬ ГЄГ­Г®ГЇГЄГі ГЁГ«ГЁ document.getElementById("aLGI").click();
 
 
 ClickLink(PXL,Text=""){
